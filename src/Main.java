@@ -5,7 +5,7 @@ import chess.ChessMatch;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        ChessMatch chessmat = new ChessMatch();
-        UI.printBoard(chessmat.getPieces());
+        ChessMatch chessMatch = new ChessMatch();
+        UI.printBoard(chessMatch.getPieces());
     }
 }
