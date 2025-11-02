@@ -25,12 +25,34 @@ public class ChessMatch {
         }
         return mat;
     }
+    public  ChessPiece permormeChessMove(ChessPosition sourcePosition, ChessPosition targetPosition){
+        Position source = sourcePosition.toPosition();
+        Position target = targetPosition.toPosition();
+        validateSourcePosition(source);
 
-    public void placeNewPiece(char column, int row, ChessPiece piece){
+        Piece capturePiece = makeMove(source, target);
+
+        return (ChessPiece)capturePiece;
+    }
+
+    private void validateSourcePosition(Position position){
+        if (!board.thereIsAPiece(position)){
+            throw new ChessException("There is not a piece on source position");
+        }
+    }
+
+    private Piece makeMove(Position source, Position target){
+        Piece p = board.removePiece(source);
+        Piece capturePiece = board.removePiece(target);
+        board.placeChessPiece(p, target);
+        return capturePiece;
+    }
+
+    private void placeNewPiece(char column, int row, ChessPiece piece){
         board.placeChessPiece(piece, new ChessPosition(column,row).toPosition());
     }
 
-    public void initialSetup(){
+    private void initialSetup(){
         placeNewPiece('a',8,new Rook(board, Color.BLACK));
         placeNewPiece('a',1,new Rook(board, Color.WHITE));
         placeNewPiece('h',1,new Rook(board, Color.WHITE));
